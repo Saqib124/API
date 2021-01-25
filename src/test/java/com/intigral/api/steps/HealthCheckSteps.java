@@ -43,7 +43,8 @@ public class HealthCheckSteps extends BaseSteps {
         Assert.assertTrue(responseArray.length()!=0);
         for(Object item: responseArray ){
             JSONObject object = (JSONObject)item;
-            Assert.assertTrue(parts[0] + " json array don't contains key " + parts[1],object.has(parts[1]));
+            String errorMsg = parts[0] + " json array don't contains key " + parts[1];
+            Assert.assertTrue(errorMsg,object.has(parts[1]));
         }
     }
 
@@ -60,7 +61,8 @@ public class HealthCheckSteps extends BaseSteps {
         for(Object item: responseArray ){
             JSONObject object = (JSONObject)item;
             JSONObject localizedObj = (JSONObject)object.get(parts[1]);
-            Assert.assertTrue("Key:"+ parts[2] + " not found under " + parts[1],localizedObj.has(parts[2]));
+            String errorMsg = "Key:"+ parts[2] + " not found under " + parts[1];
+            Assert.assertTrue(errorMsg,localizedObj.has(parts[2]));
         }
     }
 
@@ -78,7 +80,8 @@ public class HealthCheckSteps extends BaseSteps {
         for(Object item: responseArray ){
             JSONObject object = (JSONObject)item;
             boolean typeCheck = object.get(parts[1]) instanceof Boolean;
-            Assert.assertTrue(parts[1] + " dataType is not Boolean",typeCheck);
+            String errorMsg = parts[1] + " dataType is not Boolean";
+            Assert.assertTrue(errorMsg,typeCheck);
         }
     }
 
@@ -100,7 +103,8 @@ public class HealthCheckSteps extends BaseSteps {
             if (!typeCheck)
                 break;
         }
-        Assert.assertTrue(parts[1] +" dataType is not String", typeCheck);
+        String errorMsg = parts[1] +" dataType is not String";
+        Assert.assertTrue(errorMsg, typeCheck);
     }
 
     /**
@@ -118,7 +122,8 @@ public class HealthCheckSteps extends BaseSteps {
         for(Object item: responseArray ){
             JSONObject object = (JSONObject)item;
             String type = object.get(parts[1]).toString();
-            Assert.assertTrue("Program: '" + type+ "' is invalid programType",Helper.containsCaseInsensitive(type,programType));
+            String errorMsg = "Program: '" + type+ "' is invalid programType";
+            Assert.assertTrue(errorMsg,Helper.containsCaseInsensitive(type,programType));
         }
     }
 
